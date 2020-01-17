@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function DevForm({ onSubmit }) {
+    //cria-se um Estado para armazenar o valor de latitude e longitude
     const [github_username, setGithubUsername] = useState('');
     const [techs, setTechs] = useState('');
     const [latitude, setLatitude] = useState('');
@@ -62,6 +63,7 @@ function DevForm({ onSubmit }) {
                         name="latitude"
                         id="latitude"
                         required value={latitude}
+                        //onChange, abaixo, registra a mudança de Estado, o que dispara uma série de coisas atreladas à mudançade Estado
                         onChange={e => setLatitude(e.target.value)} />
                 </div>
 
