@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-  "dependencies": {
-    "axios": "^0.19.1"
-=======
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
@@ -18,6 +14,5 @@
   
   "devDependencies": {
     "nodemon": "^2.0.2"
->>>>>>> 1ee11836f85d26e9fea6b70a9e8564c63cbafa17
   }
 }
