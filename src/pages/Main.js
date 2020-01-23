@@ -194,3 +194,5 @@ const styles = StyleSheet.create({
 })
 
 export default Main;
+
+// comentário adicional pra conseguir adicionar tudo no github
