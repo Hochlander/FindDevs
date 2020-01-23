@@ -4,6 +4,7 @@
 const axios = require('axios');
 const Dev = require('../models/Dev');
 const parseStringAsArray = require('../utils/parseStringAsArray'); 
+const {findConnections, sendMessage} = require('../websocket');
 
 // funções do controller: INDEX(mostrar uma lista), SHOW(mostrar um único), 
 //STORE(criar), UPDATE(alterar), DESTROY(deletar)
@@ -53,6 +54,14 @@ module.exports = {
                 techs: techsArray,
                 location,
             })
+
+            //filtrar conexões de acordo com dondições de localização (10km) e tecnologia (compatível)
+            const sendSocketMessageTo = findConnections(
+                {latitude, longitude},
+                techsArray,
+                )
+
+            sendMessage(sendSocketMessageTo, 'new-dev', dev);
         }
 
         // a linha abaixo dá o comando de retornar os dados que foram cadastrados na função acima

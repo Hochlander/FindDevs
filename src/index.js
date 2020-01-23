@@ -7,17 +7,34 @@ const express = require('express');
 // É a ferramenta decomunicação entre aplicação e DB.
 const mongoose = require('mongoose');
 
+const cors = require('cors');
+
+const http = require('http');
+
 // as rotas exportadas pelo arquivo "routes" são importadas para "index" pelo comando abaixo
 //passa-se o caminho relativo "./", e não o nome do arquivo (que seria .js)
 const routes = require('./routes');
 
+//importa-se a função.
+const {setupWebsocket} = require('./websocket')
+
 //cria-se a variável app, e o express como uma função da variável app
 const app = express();
+
+// a linha abaixo extrai o servidor http de dentro do express;
+//normalmente o servidor http vem embutido no express.
+//isso pode ser um problema quando se deseja usar algum protocolo que não o http. É o caso aqui.
+const server = http.Server(app);
+
+//envia-se o servidor
+setupWebsocket(server);
 
 mongoose.connect('mongodb+srv://omnistack:root@cluster0-4ybp0.mongodb.net/test?retryWrites=true&w=majority',{
     useNewUrlParser:true,
     useUnifiedTopology: true,
 });
+
+app.use(cors());
 
 // ".use" significa que o que virá depois será valido para todas as rotas da aplicação;
 // a linha abaixo informa ao express que ele receberá informações no formato json
@@ -44,4 +61,4 @@ app.use(express.json());
 app.use(routes);
 
 
-app.listen(3333);
+server.listen(3333);
